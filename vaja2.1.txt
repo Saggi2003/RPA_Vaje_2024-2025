@@ -1,0 +1,9 @@
+#include <stdio.h>
+#include <time.h>
+int main(void) {
+  int  d, a;   
+  scanf("%d", &a);
+  d = 2 < a && a < 5;
+  printf("%d", d);
+  return 0;
+}
