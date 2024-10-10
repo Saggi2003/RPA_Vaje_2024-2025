@@ -1,0 +1,134 @@
+#include <stdio.h>
+#include <time.h>
+int main(void) {
+  unsigned int stevilo;
+  scanf("%u", &stevilo);
+  if (stevilo > 0 && stevilo < 20) {
+    
+    switch (stevilo) {
+    case 1:
+      printf("Ena");
+      break;
+    case 2:
+      printf("Dva");
+      break;
+    case 3:
+      printf("Tri");
+      break;
+    case 4:
+      printf("Štiri");
+      break;
+    case 5:
+      printf("Pet");
+      break;
+    case 6:
+      printf("Šest");
+      break;
+    case 7:
+      printf("Sedem");
+      break;
+    case 8:
+      printf("Osem");
+      break;
+    case 9:
+      printf("Devet");
+      break;
+    case 10:
+      printf("Deset");
+      break;
+    case 11:
+      printf("Enajst");
+      break;
+    case 12:
+      printf("Dvanajst");
+      break;
+    case 13:
+      printf("Trinajst");
+      break;
+    case 14:
+      printf("Štrnajst");
+      break;
+    case 15:
+      printf("Petnajst");
+      break;
+    case 16:
+      printf("Šestnajst");
+      break;
+    case 17:
+      printf("Sedemnajst");
+      break;
+    case 18:
+      printf("Osemnajst");
+      break;
+    case 19:
+      printf("Devetnajst");
+      break;
+    }
+  } else if
+    (stevilo >= 20 && stevilo <= 99);
+  {
+    unsigned int stevka1 = stevilo % 10;
+    unsigned int stevka2 = stevilo / 10;
+    
+    switch (stevka1) {
+    default:
+      break;
+    case 1:
+      printf("Enain");
+      break;
+    case 2:
+      printf("Dvain");
+      break;
+    case 3:
+      printf("Triin");
+      break;
+    case 4:
+      printf("Štirin");
+      break;
+    case 5:
+      printf("Petin");
+      break;
+    case 6:
+      printf("Šetrin");
+      break;
+    case 7:
+      printf("Sedemin");
+      break;
+    case 8:
+      printf("Osemin");
+      break;
+    case 9:
+      printf("Devetin");
+      break;
+    }
+    
+    switch (stevka2) {
+    default:
+      break;
+    case 2:
+      printf("Dvajset");
+      break;
+    case 3:
+      printf("Trideset");
+      break;
+    case 4:
+      printf("štirideset");
+      break;
+    case 5:
+      printf("Petdeset");
+      break;
+    case 6:
+      printf("Šestdeset");
+      break;
+    case 7:
+      printf("Sedemdeset");
+      break;
+    case 8:
+      printf("Osemdeset");
+      break;
+    case 9:
+      printf("Devetdeset");
+      break;
+    }
+  }
+}
