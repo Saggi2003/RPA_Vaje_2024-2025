@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main(void) {
+  float a, b, c;
+  unsigned int  pro;
+  printf("Vnesi velikosti stranic trikotnika \nA: \nB: \nC: ");
+  scanf("\nA:%f\n,B:%f\n,C:%f\n", &a, &b, &c);
+  printf("\n(0) Vnos stranic, (1) Ploscina, (2) Obseg, (3) Koti, (4) Izhod\n");
+  scanf("%d", &pro);
+  switch (pro) {
+  case 0:
+    printf("vnesi velikosti stranic trikotnika : ");
+    scanf("%f\t,%f\t,%f\t", &a, &b, &c);
+    break;
+  case 1:
+    printf("Ploscina trikotnika je %f", a * b / 2);
+    break;
+  case 2:
+    printf("Obseg trikotnika je %f", a + b + c);
+    break;
+  case 3:
+    printf("Koti trikotnika so %f, %f, %f", acos(a / c), acos(b / c), acos(c / a));
+    break;
+  }
+}
