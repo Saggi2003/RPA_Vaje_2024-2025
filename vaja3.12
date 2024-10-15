@@ -1,10 +1,11 @@
 #include <stdio.h>
-
+#include <math.h>
 int main(void) {
   float a, b, c;
   unsigned int  pro;
-  printf("Vnesi velikosti stranic trikotnika \nA: \nB: \nC: ");
+  printf("Vnesi velikosti stranic trikotnika \tA: \tB: \tC: ");
   scanf("\nA:%f\n,B:%f\n,C:%f\n", &a, &b, &c);
+  
   printf("\n(0) Vnos stranic, (1) Ploscina, (2) Obseg, (3) Koti, (4) Izhod\n");
   scanf("%d", &pro);
   switch (pro) {
