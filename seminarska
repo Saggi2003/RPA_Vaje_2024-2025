@@ -1,0 +1,146 @@
+#include <Arduino.h>
+#define LDR 13
+#define NTC 14
+int NTC_stanje, LDR_stanje;
+int NTC_stanje_1, LDR_stanje_1;
+#define LED1_L 19
+#define LED2_L 18
+#define LED3_L 17
+#define LED4_L 16
+#define LED_T 2
+bool test = false;
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+void fillrect();
+void mraz();
+void temperatura();
+
+
+
+#define OLED_RESET -1
+#define SCREEN_ADDRESS 0x3c
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+void setup()
+{
+  pinMode(LDR, INPUT);
+  pinMode(NTC, INPUT);
+  pinMode(LED1_L, OUTPUT);
+  pinMode(LED2_L, OUTPUT);
+  pinMode(LED3_L, OUTPUT);
+  pinMode(LED4_L, OUTPUT);
+  pinMode(LED_T, OUTPUT);
+  Serial.begin(115200);
+  display.begin();
+  if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
+  {
+    Serial.println(F("SSD1306 allocation failed"));
+    for (;;)
+      ; // Don't proceed, loop forever
+  }
+  display.display();
+  fillrect();
+  mraz();
+  temperatura();
+
+
+}
+void fillrect()
+{ 
+  display.fillRect(3, 50, NTC_stanje_1 * 2, 10, 1);
+  display.display();
+}
+
+void temperatura()
+{ display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(WHITE);
+  display.setCursor(5, 5);
+  display.println(F("TEMP: "));
+  display.setTextSize(2);
+  display.setTextColor(WHITE);
+  display.setCursor(70, 5);
+  display.println(NTC_stanje_1);
+  
+}
+
+
+void mraz()
+{ 
+  display.setTextSize(2);
+  display.setTextColor(WHITE);
+  display.setCursor(40, 50);
+  display.println(F("MRAZ"));
+  display.display();
+}
+void loop()
+{ 
+  temperatura();
+  NTC_stanje = analogRead(NTC);
+  NTC_stanje_1 = map(NTC_stanje, 0, 4095, -20, 50);
+  Serial.println(NTC_stanje_1);
+   
+  if (NTC_stanje_1 <= -1)
+  {
+    if (test == false)
+    {
+      Serial.println("ZIMA");
+      test = true;
+    }
+    digitalWrite(LED_T, 1);
+    mraz();
+  }
+  else if (NTC_stanje_1 >= 0)
+  {
+    if (test == true)
+    {
+      Serial.println("");
+      test = false;
+    }
+    fillrect();
+    digitalWrite(LED_T, 0);
+  }
+  LDR_stanje = analogRead(LDR);
+  Serial.println(LDR_stanje);
+  if (LDR_stanje <= 250)
+  {
+    digitalWrite(LED1_L, 0);
+    digitalWrite(LED2_L, 0);
+    digitalWrite(LED3_L, 0);
+    digitalWrite(LED4_L, 0);
+  }
+  else if (LDR_stanje <= 500)
+  {
+    digitalWrite(LED1_L, 1);
+    digitalWrite(LED2_L, 0);
+    digitalWrite(LED3_L, 0);
+    digitalWrite(LED4_L, 0);
+  }
+  else if (LDR_stanje <= 750)
+  {
+    digitalWrite(LED1_L, 1);
+    digitalWrite(LED2_L, 1);
+    digitalWrite(LED3_L, 0);
+    digitalWrite(LED4_L, 0);
+  }
+  else if (LDR_stanje <= 1000)
+  {
+    digitalWrite(LED1_L, 1);
+    digitalWrite(LED2_L, 1);
+    digitalWrite(LED3_L, 1);
+    digitalWrite(LED4_L, 0);
+  }
+  else if (LDR_stanje >= 1000)
+  {
+    digitalWrite(LED1_L, 1);
+    digitalWrite(LED2_L, 1);
+    digitalWrite(LED3_L, 1);
+    digitalWrite(LED4_L, 1);
+  }
+
+
+ 
+}
